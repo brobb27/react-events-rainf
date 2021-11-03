@@ -27,7 +27,7 @@ function EventList() {
     const eventComponents = eventList.map(info => <EventComponent key={info.id} event={info} />)
 
     return (
-        <div>
+        <div id='eventListContainer'>
             {eventComponents}
         </div>
     )

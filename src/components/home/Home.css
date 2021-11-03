@@ -1,0 +1,7 @@
+/* home styles */
+
+#homeContainer {
+	padding-top: 4.4rem;
+	display: grid;
+	grid-template-columns: 1fr 3.5fr;
+}

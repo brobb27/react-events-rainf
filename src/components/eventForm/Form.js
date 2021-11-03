@@ -1,18 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import './Form.css'
+import axios from 'axios'
+import { EventContext } from '../eventContext'
 
 function Form(props) {
+    // context to set event list after post/put request
+    const { setEventList } = useContext(EventContext)
+
     // init values for inputs to handle updated form
     const initValues = {
-        title: props.title || '',
+        name: props.name || '',
         description: props.description || '',
         company: props.company || '',
-        color: props.color || 'black'
+        color: props.color || '#000000',
+        // come back to solving init value of color
     }
 
     // state handler for user inputs
     const [eventInfo, setEventInfo] = useState(initValues)
     // destructured state for convenience
-    const {title, description, company, color} = eventInfo
+    const {name, description, company, color} = eventInfo
 
     // handle change for input boxes
     function handleChange(e) {
@@ -25,14 +32,41 @@ function Form(props) {
         })
     }
 
+    // handle addEvent
+    function addEvent(e) {
+        e.preventDefault()
+        axios.post(`https://rf-json-server.herokuapp.com/events/`, eventInfo)
+            .then(res => {
+                // console.log(res.data)
+                const newEvent = res.data
+                setEventList(prevList => [...prevList, newEvent])
+            })
+            .catch(err => console.log(err))
+        setEventInfo(initValues)
+    }
+
+    // handle updateEvent
+    function updateEvent(e) {
+        e.preventDefault()
+        axios.put(`https://rf-json-server.herokuapp.com/events/${props.id}`, eventInfo)
+            .then(res => {
+                console.log(res.data)
+                const updatedEvent = res.data
+                setEventList(prevList => prevList.map(event => event.id !== props.id ? event : updatedEvent))
+            })
+        props.setEdit(false)
+    }
+
     return (
-        <div>
-            <form>
+        <div className={props.class}>
+            <form 
+                onSubmit={props.isEditing === false ? addEvent : updateEvent}
+            >
                 <input 
                     type= 'text'
-                    name= 'title'
-                    value= {title}
-                    placeholder='Event Title'
+                    name= 'name'
+                    value= {name}
+                    placeholder='Event Name'
                     onChange={handleChange}
                     required
                 />
@@ -52,7 +86,7 @@ function Form(props) {
                     onChange={handleChange}
                     required
                 />
-                <span>Select Color: </span>
+                <p>Select Color</p>
                 <input 
                     type= 'color'
                     name= 'color'
@@ -60,7 +94,7 @@ function Form(props) {
                     onChange={handleChange}
                     required
                 />
-                <button>Add Event</button>
+                <button>{props.isEditing === false ? 'Add Event' : 'UpdateEvent'}</button>
             </form>
         </div>
     )

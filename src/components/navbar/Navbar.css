@@ -1,0 +1,11 @@
+/* navbar styles */
+
+#navbar {
+	position: fixed;
+	width: 100%;
+	background-color: #ed1a5d;
+	color: white;
+	padding: 0.5rem 2rem;
+	border-bottom-left-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+}
