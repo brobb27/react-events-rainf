@@ -12,9 +12,13 @@ function Form(props) {
         name: props.name || '',
         description: props.description || '',
         company: props.company || '',
-        color: props.color || '#000000',
+        color: props.color || 'black',
         // come back to solving init value of color
     }
+
+    // web safe named colors
+    const namedColors = ['black', 'blue', 'lime', 'cyan', 'aqua', 'red', 'magenta', 'yellow', 'maroon', 'purple', 'green', 'olive', 'teal']
+    const options = namedColors.map(color => <option value={color}>{color}</option>)
 
     // state handler for user inputs
     const [eventInfo, setEventInfo] = useState(initValues)
@@ -41,7 +45,10 @@ function Form(props) {
                 const newEvent = res.data
                 setEventList(prevList => [...prevList, newEvent])
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                alert(`Sorry, it looks like we were unable to ADD your event. Please try refreshing the page and try again. If the issue persists please reach out to us.`)
+            })
         setEventInfo(initValues)
     }
 
@@ -53,6 +60,10 @@ function Form(props) {
                 console.log(res.data)
                 const updatedEvent = res.data
                 setEventList(prevList => prevList.map(event => event.id !== props.id ? event : updatedEvent))
+            })
+            .catch(err => {
+                console.log(err)
+                alert('Sorry, it looks like we were unable to UPDATE your event. Please try refreshing the page and try again. If the issue persists please reach out to us.')
             })
         props.setEdit(false)
     }
@@ -87,13 +98,9 @@ function Form(props) {
                     required
                 />
                 <p>Select Color</p>
-                <input 
-                    type= 'color'
-                    name= 'color'
-                    value= {color}
-                    onChange={handleChange}
-                    required
-                />
+                <select style={{border: `solid ${color} .15rem`}} name= 'color' value= {color} onChange={handleChange} required >
+                    {options}
+                </select>
                 <button>{props.isEditing === false ? 'Add Event' : 'Update Event'}</button>
             </form>
         </div>

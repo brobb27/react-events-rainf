@@ -30,6 +30,7 @@
 	display: flex;
 	flex-direction: column;
 	height: 18rem;
+	min-width: 25rem;
 	outline: solid #2c0876 0.15rem;
 	border-radius: 0.5rem;
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { EventContext } from '../../eventContext'
 import axios from 'axios'
 import EventComponent from './EventComponent'
@@ -6,15 +6,19 @@ import EventComponent from './EventComponent'
 function EventList() {
     // context values needed for EventList components
     const {eventList, setEventList} = useContext(EventContext)
+    const [requestFailed, setRequestStatus] = useState(false)
 
     // get request function for reusability if needed
     function getEventList() {
         axios.get(`https://rf-json-server.herokuapp.com/events/`)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 setEventList(res.data)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                setRequestStatus(true)
+            })
     }
 
     // use effect to retreive list on mount
@@ -28,7 +32,10 @@ function EventList() {
 
     return (
         <div id='eventListContainer'>
-            {eventComponents}
+            {requestFailed === false ?
+            eventComponents :
+            <h1>Sorry, It looks like we are having trouble retrieving your event list. Please refresh the page. If the issue persists please reach out to our support team.</h1>
+            }
         </div>
     )
 }

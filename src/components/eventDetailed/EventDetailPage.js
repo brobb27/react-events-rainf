@@ -11,6 +11,7 @@ function EventDetailPage(props) {
     const [eventInfo, setEventInfo] = useState()
     // state handler for page loading
     const [isLoading, setLoading] = useState(true)
+    const [requestFailed, setRequestStatus] = useState(false)
 
     // get by id request
     function getEventDetails() {
@@ -20,7 +21,10 @@ function EventDetailPage(props) {
                 setEventInfo(res.data)
                 setLoading(false)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                setRequestStatus(true)
+            })
     }
 
     // get request on mount
@@ -33,7 +37,11 @@ function EventDetailPage(props) {
         <div id='eventDetailContainer'>
             {isLoading === true ?
             <div>
+                {requestFailed === true ? 
+                <h1>Sorry, we were unable to retrieve this event details. Please return to the home page and try again.</h1> 
+                :
                 <h1>Retrieving Event...</h1>
+                }
             </div>
             :
             <div id='detailsCon'>
