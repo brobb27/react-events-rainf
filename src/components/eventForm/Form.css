@@ -5,7 +5,8 @@
 .mainForm {
 	background-color: #f7f8f9;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 	padding-top: 2rem;
 	border-right: solid 0.15rem #ed1a5d;
 }
@@ -53,7 +54,16 @@
 .updateForm > form {
 	display: flex;
 	flex-direction: column;
+}
+
+.updateForm > form > input {
+	border: #ed1a5d 0.15rem solid;
+	font-size: 1rem;
+	border-radius: 0.3rem;
 	width: 10rem;
+	height: 1.8rem;
+	margin: 0.3rem 0rem;
+	padding-left: 0.3rem;
 }
 
 .updateForm > form > button {

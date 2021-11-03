@@ -94,7 +94,7 @@ function Form(props) {
                     onChange={handleChange}
                     required
                 />
-                <button>{props.isEditing === false ? 'Add Event' : 'UpdateEvent'}</button>
+                <button>{props.isEditing === false ? 'Add Event' : 'Update Event'}</button>
             </form>
         </div>
     )

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { EventContext } from '../../eventContext'
 import Form from '../../eventForm/Form'
 import './Event.css'
@@ -31,7 +32,7 @@ function EventComponent({event}) {
             {isEditing === false ?
             <>
                 <div>
-                    <h2>{event.name}</h2>
+                    <Link to={`/event/${event.id}`}><h2>{event.name}</h2></Link>
                     <div className='eventDetails'>
                         <h4>Description</h4>
                         <p>{event.description}</p>

@@ -15,16 +15,16 @@
 	border-radius: 0.5rem;
 }
 
-.componentContainer > div > h2 {
+.componentContainer > div > a > h2 {
 	border-bottom: solid #2c0876 0.125rem;
 	border-radius: 0.5rem;
-	padding: 0rem 0.5rem 0.5rem;
+	padding: 0.5rem 0.5rem 1rem;
 }
 
 .componentContainer > h2 {
 	border-bottom: solid #2c0876 0.125rem;
 	border-radius: 0.5rem;
-	padding: 0rem 0.5rem 0.5rem;
+	padding: 0.5rem 0.5rem 1rem;
 }
 
 .eventDetails {

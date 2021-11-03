@@ -9,3 +9,13 @@
 	border-bottom-left-radius: 0.5rem;
 	border-bottom-left-radius: 0.5rem;
 }
+
+#navbar > a {
+	text-decoration: unset;
+	color: white;
+	cursor: pointer;
+}
+
+#navbar > a:hover {
+	color: rgb(221, 219, 219);
+}
