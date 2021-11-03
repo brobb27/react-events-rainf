@@ -13,7 +13,9 @@ function EventList() {
         axios.get(`https://rf-json-server.herokuapp.com/events/`)
             .then(res => {
                 // console.log(res.data)
-                setEventList(res.data)
+                const eventList = res.data
+                eventList.sort((a, b) => (a.company > b.company) ? 1 : ((b.company > a.company) ? -1 : 0))
+                setEventList(eventList)
             })
             .catch(err => {
                 console.log(err)
@@ -25,7 +27,12 @@ function EventList() {
     useEffect(() => {
         getEventList()
         // eslint-disable-next-line
-    }, [])
+    }, [eventList])
+
+    //use effect for sort
+    // useEffect(() => {
+    //     eventList.sort((a, b) => (a.company > b.company) ? 1 : ((b.company > a.company) ? -1 : 0))
+    // }, [eventList])
 
     // map through eventList and create new event component for each one
     const eventComponents = eventList.map(info => <EventComponent key={info.id} event={info} />)

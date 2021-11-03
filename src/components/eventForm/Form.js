@@ -17,8 +17,8 @@ function Form(props) {
     }
 
     // web safe named colors
-    const namedColors = ['black', 'blue', 'lime', 'cyan', 'aqua', 'red', 'magenta', 'yellow', 'maroon', 'purple', 'green', 'olive', 'teal']
-    const options = namedColors.map(color => <option value={color}>{color}</option>)
+    const namedColors = ['black', 'blue', 'lime', 'cyan', 'aqua', 'red', 'magenta', 'yellow', 'maroon', 'purple', 'green', 'olive', 'teal', 'pink', 'orange']
+    const options = namedColors.map(color => <option key={color} value={color}>{color}</option>)
 
     // state handler for user inputs
     const [eventInfo, setEventInfo] = useState(initValues)
@@ -57,7 +57,7 @@ function Form(props) {
         e.preventDefault()
         axios.put(`https://rf-json-server.herokuapp.com/events/${props.id}`, eventInfo)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 const updatedEvent = res.data
                 setEventList(prevList => prevList.map(event => event.id !== props.id ? event : updatedEvent))
             })

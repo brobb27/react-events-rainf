@@ -20,11 +20,16 @@ function EventComponent({event}) {
     function deleteEvent() {
         axios.delete(`https://rf-json-server.herokuapp.com/events/${event.id}`)
         .then(res => {
-            console.log(res)
+            // console.log(res)
             setEventList(prevList => prevList.filter(savedEvent => savedEvent.id !== event.id))
             alert(`You have removed ${event.name} from the event line up.`)
         })
-        .catch(err => console.log(err))
+        .catch((err) => {
+            console.log(err);
+            alert(
+              "Sorry, we are not able to delete this event at this time. Please try again later. If the issue persists, please reach out to our support team."
+            );
+        });
     }
 
     return (
@@ -32,7 +37,7 @@ function EventComponent({event}) {
             {isEditing === false ?
             <>
                 <div>
-                    <Link to={`/event/${event.id}`}><h2>{event.name}</h2></Link>
+                    <Link style={{color: `${event.color}`}} to={`/event/${event.id}`}><h2>{event.name}</h2></Link>
                     <div className='eventDetails'>
                         <h4>Description</h4>
                         <p>{event.description}</p>
