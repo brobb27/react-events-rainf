@@ -8,7 +8,7 @@ function EventContextProvider({children}) {
 
     // sorts event list whenever there is a change made
     useEffect(() => {
-        eventList.sort((a, b) => (a.company > b.company) ? 1 : ((b.company > a.company) ? -1 : 0))
+        eventList.sort((a, b) => (a.company.toUpperCase() > b.company.toUpperCase()) ? 1 : ((b.company.toUpperCase() > a.company.toUpperCase()) ? -1 : 0))
     }, [eventList])
 
     return (
