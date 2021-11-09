@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 const EventContext = React.createContext()
 
@@ -6,13 +6,13 @@ function EventContextProvider({children}) {
     // state handler for event list
     const [eventList, setEventList] = useState([])
 
-    // sorts event list whenever there is a change made
-    useEffect(() => {
-        eventList.sort((a, b) => (a.company.toUpperCase() > b.company.toUpperCase()) ? 1 : ((b.company.toUpperCase() > a.company.toUpperCase()) ? -1 : 0))
-    }, [eventList])
+    // sorts event list after request
+    function sortEvents(list) {
+        list.sort((a, b) => (a.company.toUpperCase() > b.company.toUpperCase()) ? 1 : ((b.company.toUpperCase() > a.company.toUpperCase()) ? -1 : 0))
+    }
 
     return (
-        <EventContext.Provider value={{eventList, setEventList}}>
+        <EventContext.Provider value={{eventList, setEventList, sortEvents}}>
             {children}
         </EventContext.Provider>
     )

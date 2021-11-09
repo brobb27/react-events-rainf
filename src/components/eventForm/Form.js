@@ -5,7 +5,7 @@ import { EventContext } from '../eventContext'
 
 function Form(props) {
     // context to set event list after post/put request
-    const { setEventList } = useContext(EventContext)
+    const { setEventList, sortEvents } = useContext(EventContext)
 
     // init values for inputs to handle updated form
     const initValues = {
@@ -43,7 +43,11 @@ function Form(props) {
             .then(res => {
                 // console.log(res.data)
                 const newEvent = res.data
-                setEventList(prevList => [...prevList, newEvent])
+                setEventList(prevList => {
+                    const newList = [...prevList, newEvent]
+                    sortEvents(newList)
+                    return newList
+                })
             })
             .catch(err => {
                 console.log(err)
@@ -59,7 +63,11 @@ function Form(props) {
             .then(res => {
                 // console.log(res.data)
                 const updatedEvent = res.data
-                setEventList(prevList => prevList.map(event => event.id !== props.id ? event : updatedEvent))
+                setEventList(prevList => {
+                    const newList = prevList.map(event => event.id !== props.id ? event : updatedEvent)
+                    sortEvents(newList)
+                    return newList
+                })
             })
             .catch(err => {
                 console.log(err)

@@ -27,7 +27,7 @@ function EventList() {
     useEffect(() => {
         getEventList()
         // eslint-disable-next-line
-    }, [eventList])
+    }, [])
 
     // map through eventList and create new event component for each one
     const eventComponents = eventList.map(info => <EventComponent key={info.id} event={info} />)
