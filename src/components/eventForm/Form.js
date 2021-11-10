@@ -13,7 +13,6 @@ function Form(props) {
         description: props.description || '',
         company: props.company || '',
         color: props.color || 'black',
-        // come back to solving init value of color
     }
 
     // web safe named colors

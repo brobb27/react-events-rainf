@@ -5,7 +5,7 @@ import EventComponent from './EventComponent'
 
 function EventList() {
     // context values needed for EventList components
-    const {eventList, setEventList} = useContext(EventContext)
+    const {eventList, setEventList, sortEvents} = useContext(EventContext)
     const [requestFailed, setRequestStatus] = useState(false)
 
     // get request function for reusability if needed
@@ -14,7 +14,7 @@ function EventList() {
             .then(res => {
                 // console.log(res.data)
                 const eventList = res.data
-                eventList.sort((a, b) => a.company.toUpperCase() > b.company.toUpperCase() ? 1 : ((b.company.toUpperCase() > a.company.toUpperCase()) ? -1 : 0))
+                sortEvents(eventList)
                 setEventList(eventList)
             })
             .catch(err => {
