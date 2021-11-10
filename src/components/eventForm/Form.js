@@ -76,7 +76,7 @@ function Form(props) {
     }
 
     return (
-        <div className={props.class}>
+        <div className={props.theClass}>
             <form 
                 onSubmit={props.isEditing === false ? addEvent : updateEvent}
             >

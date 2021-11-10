@@ -59,7 +59,7 @@ function EventComponent({event}) {
                     id= {event.id}
                     isEditing = {isEditing}
                     setEdit = {setEdit}
-                    class= 'updateForm'
+                    theClass= 'updateForm'
                 />
                 <button onClick={toggleEdit} className='cancleButton'>Cancel</button>
             </>

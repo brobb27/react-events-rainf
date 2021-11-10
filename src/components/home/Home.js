@@ -6,7 +6,7 @@ import './Home.css'
 function Home() {
     return (
         <div id='homeContainer'>
-            <Form isEditing= {false} class='mainForm'/>
+            <Form isEditing= {false} theClass='mainForm'/>
             <EventList />
         </div>
     )
