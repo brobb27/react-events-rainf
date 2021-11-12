@@ -64,3 +64,13 @@
 .cancleButton {
 	width: 10rem;
 }
+
+/* checkbox styles */
+
+.checkbox {
+	float: right;
+	margin-right: 1rem;
+	margin-top: 0.5rem;
+	height: 1.1rem;
+	width: 1.1rem;
+}

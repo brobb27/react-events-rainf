@@ -5,7 +5,7 @@ import { EventContext } from '../../eventContext'
 import Form from '../../eventForm/Form'
 import './Event.css'
 
-function EventComponent({event}) {
+function EventComponent({event, handleCheck}) {
     // import context variabls needed
     const { setEventList } = useContext(EventContext)
 
@@ -47,6 +47,7 @@ function EventComponent({event}) {
                 </div>
                 <button onClick={toggleEdit}>Update</button>
                 <button onClick={deleteEvent}>Delete</button>
+                <input type='checkbox' value={event.id} className='checkbox' onChange={handleCheck}/>
             </>
             :
             <>

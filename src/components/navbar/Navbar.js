@@ -5,7 +5,7 @@ import './Navbar.css'
 function Navbar() {
     return (
         <div id='navbar'>
-            <Link to='/'><h1>rainfocus</h1></Link>
+            <Link to='/'><h1>Conference</h1></Link>
             <h4>event planner</h4>
         </div>
     )

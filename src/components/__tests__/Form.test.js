@@ -4,13 +4,15 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import Form from "../eventForm/Form";
 import {EventContextProvider} from '../eventContext'
 
-const MockForm = ({isEditing, theClass}) => {
+const MockForm = ({isEditing, theClass, eventInfo}) => {
     return (
         <EventContextProvider>
-            <Form isEditing={isEditing} theClass={theClass}/>
+            <Form isEditing={isEditing} theClass={theClass} eventInfo={eventInfo}/>
         </EventContextProvider>
     )
 }
+
+// Set up integration test using the parent component of Form and EventList (which is the home component)
 
 describe("Form Tests", () => {
     // Add event form block
@@ -24,7 +26,57 @@ describe("Form Tests", () => {
             // Expect to find that element
             expect(addButton).toHaveTextContent('Add Event')
         })
+
+        // Tests to make sure input form values change
+        // Event Name
+        test("Event Name value changes according to user input", () => {
+            render(
+                <MockForm 
+                    isEditing={false} 
+                    theClass="mainForm"
+                />)
+            const inputElement = screen.getByPlaceholderText('Event Name')
+            fireEvent.change(inputElement, { target: {value: 'Testing Event Name'} })
+            expect(inputElement.value).toBe("Testing Event Name")
+        })
+
+        // Event Description
+        test("Event Description value changes according to user input", () => {
+            render(
+                <MockForm 
+                    isEditing={false} 
+                    theClass="mainForm"
+                />)
+            const inputElement = screen.getByPlaceholderText('Event Description')
+            fireEvent.change(inputElement, { target: {value: 'Testing Event Description'} })
+            expect(inputElement.value).toBe("Testing Event Description")
+        })
+
+        // Company Name
+        test("Company value changes according to user input", () => {
+            render(
+                <MockForm 
+                    isEditing={false} 
+                    theClass="mainForm"
+                />)
+            const inputElement = screen.getByPlaceholderText('Company Name')
+            fireEvent.change(inputElement, { target: {value: 'Testing Company Name'} })
+            expect(inputElement.value).toBe("Testing Company Name")
+        })
+
+        // Color
+        test("Color value changes according to user selection", () => {
+            render(
+                <MockForm 
+                    isEditing={false} 
+                    theClass="mainForm"
+                />)
+            const inputElement = screen.getByTestId('colorSelector')
+            fireEvent.change(inputElement, { target: {value: 'green'} })
+            expect(inputElement.value).toBe("green")
+        })
     })
+    
     
     // Update event form block
     describe("Update Event Form Tests", () => {
@@ -36,5 +88,7 @@ describe("Form Tests", () => {
             // Or
             expect(updateButton.textContent).toBe('Update Event')
         })
+
+        // Test to make sure input form values change
     })
 })

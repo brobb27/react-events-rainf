@@ -105,7 +105,13 @@ function Form(props) {
                     required
                 />
                 <p>Select Color</p>
-                <select style={{border: `solid ${color} .15rem`}} name= 'color' value= {color} onChange={handleChange} required >
+                <select 
+                    style={{border: `solid ${color} .15rem`}} 
+                    name= 'color' value= {color} 
+                    onChange={handleChange}
+                    data-testid='colorSelector'
+                    required 
+                >
                     {options}
                 </select>
                 <button>{props.isEditing === false ? 'Add Event' : 'Update Event'}</button>
