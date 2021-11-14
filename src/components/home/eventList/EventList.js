@@ -39,26 +39,46 @@ function EventList() {
         setChecked(prevList => prevList.includes(eventId) ? prevList.filter(item => item !== eventId) : [...prevList, eventId])
     }
 
-    function deletePromise(id) {
-        return new Promise((resolve, reject) => {
-            axios.delete(`https://rf-json-server.herokuapp.com/events/${id}`)
-                .then(res => {
-                    console.log(res)
-                    setEventList(prevList => prevList.filter(event => event.id !== id))
-                    resolve(id)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        })
-    }
+    // // Delete promise
+    // function deletePromise(id) {
+    //     return new Promise((resolve, reject) => {
+    //         axios.delete(`https://rf-json-server.herokuapp.com/events/${id}`)
+    //             .then(res => {
+    //                 console.log(res)
+    //                 setEventList(prevList => prevList.filter(event => event.id !== id))
+    //                 resolve(id)
+    //             })
+    //             .catch(err => {
+    //                 console.log(err)
+    //             })
+    //     })
+    // }
 
-    // handle delete selected
+    // // Handle delete selected
+    // async function handleDelteSelected() {
+    //     for await (const item of checkedList) {
+    //         await deletePromise(item)
+    //     }
+    //     getEventList()
+    //     setChecked([])
+    // }
+
+    // OR
+    
+    // Handle delete selected
     async function handleDelteSelected() {
-        for (const item of checkedList) {
-            await deletePromise(item)
-            getEventList()
+        for await (const item of checkedList) {
+            await axios.delete(`https://rf-json-server.herokuapp.com/events/${item}`)
+            .then(res => {
+                console.log(res)
+                setEventList(prevList => prevList.filter(event => event.id !== item))
+            })
+            .catch(err => {
+                console.log(err)
+            })
         }
+        getEventList()
+        setChecked([])
     }
 
     // map through eventList and create new event component for each one
@@ -69,7 +89,7 @@ function EventList() {
             {requestFailed === false ?
             <>
             {eventComponents}
-            <button onClick={handleDelteSelected}>Delete Selected Events</button>
+            <button onClick={handleDelteSelected} id='deleteSelected'>Delete Selected Events</button>
             </> :
             <h1>Sorry, It looks like we are having trouble retrieving your event list. Please refresh the page. If the issue persists please reach out to our support team.</h1>
             }
